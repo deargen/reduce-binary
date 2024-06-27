@@ -1,5 +1,10 @@
 name: Build and release when new app version is out.
 on:
+  push:
+    branches:
+      - main
+      - master
+
   schedule:
     - cron: '0 10 * * *'
 
