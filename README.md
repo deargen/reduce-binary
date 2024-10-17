@@ -1,5 +1,5 @@
 # Reduce Binary
-![build](https://github.com/kiyoon/reduce-binary/actions/workflows/check_app_version.yml/badge.svg)
+![build](https://github.com/deargen/reduce-binary/actions/workflows/check_app_version.yml/badge.svg)
 
 This utilises GitHub Action to **detect, build and release the latest version of the app as soon as they get released**.
 
