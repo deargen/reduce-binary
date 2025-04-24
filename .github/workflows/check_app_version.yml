@@ -47,9 +47,9 @@ jobs:
           docker create -ti --name reducecontainer reduce bash
           docker cp reducecontainer:/opt/build/reduce.appimage .
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build-linux-x86_64
           path: reduce.appimage
 
   macos:
@@ -66,9 +66,9 @@ jobs:
           cd build && tar czf reduce-macos-${{ matrix.target }}.tar.gz *
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: build
+          name: build-macos-${{ matrix.target }}
           path: build/reduce-macos-${{ matrix.target }}.tar.gz
 
   release:
@@ -77,9 +77,10 @@ jobs:
     needs: [get-version, macos]
     if: needs.get-version.outputs.modified == 'true'
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
-          name: build
+          pattern: build-*
+          merge-multiple: true
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: True
